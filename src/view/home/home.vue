@@ -129,7 +129,7 @@
           <div class="text-center project-referal" v-if="index === 0">
             <p>该简历项目采用VUE.js编写</p>
             <a
-              href="https://github.com/gepengcheng/resume"
+              href="https://github.com/gpcwhitecap/resume"
               class="btn btn-primary"
             >
               在Github上查看项目
