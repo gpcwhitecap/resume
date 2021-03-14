@@ -1,0 +1,38 @@
+.experience-item {
+  margin-bottom: 40px;
+  .experience-period,
+  .hidden-phone {
+    margin-top: 8px;
+    color: #777;
+  }
+  .experience-details {
+    display: flex;
+    & > div {
+      position: relative;
+      padding: 0 16px;
+      //   border-right: 1px solid #22a39f;
+      &::after {
+        content: "";
+        width: 1px;
+        height: 16px;
+        background-color: #22a39f;
+        position: absolute;
+        right: 0;
+        top: 5px;
+      }
+      &:last-child::after {
+        display: none;
+      }
+      &:first-child {
+        padding-left: 0;
+      }
+      a {
+        text-decoration: none;
+        color: #22a39f;
+      }
+      .icon {
+        padding-right: 4px;
+      }
+    }
+  }
+}
