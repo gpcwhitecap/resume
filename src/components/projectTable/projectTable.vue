@@ -39,42 +39,32 @@
             <div class="table-dd-unfold" v-if="item.unfold">
               <div class="cms-container">
                 <div class="table-unfold-title">
-                  <h3>HDG {{ item.name }}</h3>
-                </div>
-                <div class="table-unfold-description h8">
-                  {{ item.description }}
+                  <h3>{{ item.cityName }}</h3>
                 </div>
 
                 <div class="table-cards">
-                  <div class="table-cards-title">
-                    <h5>近期活动</h5>
-                  </div>
+                  <div class="table-cards-title"></div>
                   <div class="table-cards-content">
                     <div class="table-cards-horizontal">
                       <div class="content-shadow">
-                        <a class="content-img"><img alt="Picture Two" /> </a>
+                        <a class="content-img" v-if="item.img">
+                          <img :src="item.img" alt="Picture Two" />
+                        </a>
                         <div class="content-container">
-                          <div class="table-cards-title">
-                            <a class="h6">3333</a>
-                            <div class="table-cards-tags">
-                              <span class="table-cards-tag">123</span>
+                          <div>
+                            <h6>项目概要</h6>
+                            <div class="table-unfold-description h8">
+                              {{ item.description }}
                             </div>
                           </div>
-
+                          <h6>职能描述</h6>
                           <p class="item-description text-regular">
-                            description
+                            {{ item.skillSummary }}
                           </p>
-                          <a href="#" class="cms-btn btn-dark-line"> more </a>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="table-organizers">
-                  <div class="table-organizers-title">
-                    <h5>组织者</h5>
-                  </div>
-                  <div class="table-organizers-content"></div>
                 </div>
               </div>
             </div>

@@ -109,13 +109,18 @@
         .table-dd-icons-unfold {
           margin-left: @spacing-2x-base;
           display: inline-block;
+          font-family: "iconfont";
           width: 16px;
           height: 16px;
           // background: url(./components/img/unfold.svg) no-repeat;
           background-size: 100%;
           cursor: pointer;
-          &.active {
+          &.active::before {
+            content: '\e685';
             // background-image: url(./components/img/folded.svg);
+          }
+          &::before{
+            content: "\e686";
           }
         }
       }
@@ -132,6 +137,9 @@
       }
       h5 {
         margin-bottom: @spacing-3x-base;
+      }
+      h6{
+        margin-bottom: 16px;
       }
     }
   }
