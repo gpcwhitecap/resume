@@ -1,7 +1,7 @@
 <template>
   <div class="cms-floor projectTable">
     <div class="table-container">
-      <div class="table-search container">
+      <div class="table-search">
         <i @click="onSubmit"></i>
         <input
           type="text"
@@ -15,18 +15,15 @@
       <div class="table-content">
         <template v-for="(item, index) in table_data">
           <div class="table-dt" v-if="item.show" v-bind:key="index">
-            <div class="table-dd cms-container">
+            <div class="table-dd">
               <div class="table-dd-city">
                 {{ item.cityName }}
+                <span>({{ item.abilities.slice(0, 3).join("、") }})</span>
               </div>
               <div class="table-dd-name">
                 <p>
-                  {{ item.name }}
-                  <span class="table-tag-new" v-if="item.isNew">New</span>
+                  {{ item.time }}
                 </p>
-              </div>
-              <div class="table-dd-organizer">
-                <p>名组织者</p>
               </div>
               <div class="table-dd-icons">
                 <div
@@ -52,14 +49,15 @@
                         </a>
                         <div class="content-container">
                           <div>
-                            <h6>项目概要</h6>
-                            <div class="table-unfold-description h8">
-                              {{ item.description }}
-                            </div>
+                            <h6>项目概要：</h6>
+                            <div
+                              class="table-unfold-description h8"
+                              v-html="item.description"
+                            ></div>
                           </div>
-                          <h6>职能描述</h6>
+                          <h6>主要技术栈：</h6>
                           <p class="item-description text-regular">
-                            {{ item.skillSummary }}
+                            {{ item.abilities.join("、") }}
                           </p>
                         </div>
                       </div>

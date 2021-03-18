@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-import axios from 'axios';
 import App from './App.vue';
 import '../mock'; // 引用mock
 
@@ -11,7 +10,6 @@ import './components/less/jh.less';
 
 // require('../mock');
 const app = createApp(App);
-app.config.globalProperties.$axios = axios;
 // app.use(route)
 app.use(route);
 

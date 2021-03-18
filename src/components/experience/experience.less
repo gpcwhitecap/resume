@@ -10,6 +10,10 @@
     & > div {
       position: relative;
       padding: 0 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
       //   border-right: 1px solid #22a39f;
       &::after {
         content: "";
@@ -32,6 +36,22 @@
       }
       .icon {
         padding-right: 4px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 992px) {
+  .experience-item {
+    flex-direction: column;
+    .experience-details {
+      flex-direction: column;
+      flex-wrap: wrap;
+      & > div {
+        width: 100%;
+        padding: 0;
+      }
+      & > div::after {
+        display: none;
       }
     }
   }

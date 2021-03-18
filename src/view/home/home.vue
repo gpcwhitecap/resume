@@ -6,17 +6,17 @@
       data-position="center center"
     >
       <div class="container">
-        <h1>{{ profile.title }}</h1>
-        <p class="lead">{{ profile.description }}</p>
+        <h1>{{ profile.name }}</h1>
+        <p class="lead">{{ profile.info }}</p>
       </div>
 
       <div class="overlay"></div>
 
-      <div href="#profile" class="scroll-down">
+      <div class="scroll-down" @click="onNavClick(0)">
         <span class="icon iconfont icon-xiangxia"></span>
       </div>
     </div>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" :class="{ fixed: navOption.fixed }">
       <div class="navbar-header">
         <div class="navbar-toggle" @click="navOption.hide = !navOption.hide">
           <span class="icon-bar"></span>
@@ -52,37 +52,33 @@
           <div class="col-md-4">
             <h3>关于我</h3>
             <p>
-              我是一个全方位的Web开发人员。我是一位对前端技术有丰富知识的高级程序员。我爱结构和秩序，我也代表质量。我喜欢花时间修复小细节和优化Web应用程序。我也喜欢在团队中工作，您会学得更快，更多。俗话说：“两个脑袋总比一个脑袋好”。
+              我是一个全方位的Web开发人员，有着坚实的计算机基础知识以及丰富的经验。<br />
+              前端爱好者，多种框架皆有实战经验，精通React，Vue.js，熟练Angular，TypeScript，了解Flutter。<br />
+              对后端也有一定的了解，熟练使用Nodejs、C#,了解express、egg,有Liunx项目部署经验。<br />
+              热衷于创新，爱好于学习，既擅长团队合作，又有自己的见解能够独立完成任务。
             </p>
           </div>
           <div class="col-md-4 text-center">
             <img
-              src="/img/img_gpc.jpg"
+              src="../../assets/img/img_gpc.jpg"
               alt="Pascal van Gemert"
               class="my-img"
               width="246"
               height="246"
             />
           </div>
-          <div class="col-md-4">
-            <h3>Details</h3>
+          <div class="col-md-4 profile-info">
+            <h3>基本信息</h3>
             <p>
-              <strong>Name:</strong><br />
+              <strong>姓 名:</strong><br />
               葛朋程<br />
-              <strong>Age:</strong><br />
+              <strong>年 龄:</strong><br />
               28<br />
-              <strong>Location:</strong><br />
-              江苏南京
+              <strong>所在地点:</strong><br />
+              江苏南京<br />
+              <strong>婚姻状况:</strong><br />
+              已婚
             </p>
-
-            <a
-              href="https://twitter.com/pascalvgemert"
-              class="twitter-follow-button"
-              data-show-count="false"
-              data-size="large"
-              data-show-screen-name="false"
-              >Follow @pascalvgemert</a
-            >
           </div>
         </div>
       </div>
@@ -91,8 +87,8 @@
       <div class="container">
         <h2>个人经历</h2>
         <p class="lead">
-          “Protons give an atom its identity, electrons its personality.”<br />-
-          Bill Bryson, A short history of nearly everything
+          “不要嘲笑那些比你们拼命努力的人，也不要理会那些嘲笑你拼命努力的人。”<br />
+          ——松下幸之助
         </p>
 
         <div v-for="(item, index) in experiences" :key="index">
@@ -113,7 +109,7 @@
       <div class="container">
         <h2>技术栈</h2>
         <p class="lead">
-          Life without knowledge is death in disguise.<br />- Talib Kweli
+          “把最复杂的变成最简单的，才是最高明的。 “<br />——达·芬奇
         </p>
         <div v-for="(item, index) in abilities" :key="index">
           <hr />
@@ -142,7 +138,7 @@
       <div class="container">
         <h2>项目案例</h2>
         <p class="lead">
-          “You can do anything you set your mind to.”<br />- Benjamin Franklin
+          “有一天，当回顾自己走过的路时，你会发现这些奋斗不息的岁月，才是最美好的人生。“<br />——弗洛伊德
         </p>
         <ProjectTable :data="projects"></ProjectTable>
       </div>
@@ -150,7 +146,9 @@
     <div class="background-gray">
       <div class="container contact">
         <h2>联系方式</h2>
-        <p class="lead">“如果我问人们他们想要什么，他们会说更快的马。"</p>
+        <p class="lead">
+          “所有的不平淡，都是在忍耐了足够的平淡之后诞生的。"<br />——《白说》
+        </p>
 
         <hr />
 
@@ -187,9 +185,6 @@
 import Experience from "../../components/experience/experience.vue";
 import Score from "../../components/score/score.vue";
 import ProjectTable from "../../components/projectTable/projectTable.vue";
-import Header from "../../components/Header/Header.vue";
-import Footer from "../../components/footer/footer.vue";
-import SmallGoods from "../../components/smallGoods/smallGoods.vue";
 
 export default {
   name: "Home",
@@ -197,33 +192,25 @@ export default {
     Experience,
     Score,
     ProjectTable,
-    Header,
-    Footer,
-    SmallGoods,
   },
   props: {},
   data() {
     return {
       navOption: {
         index: 0,
-        hide: false,
+        hide: true,
+        fixed: false,
       },
+      catalogCur: 0,
+      fixedScrollTop: [],
       profile: {
+        name: "葛朋程",
+        info: "个人互动简历",
         title: "基础信息",
         description: "一名不断学习的全栈开发攻城狮",
       },
       nav: ["基础信息", "个人经历", "技术栈", "项目案例", "联系方式"],
-      cf_data: [
-        {
-          img: "http://placehold.it/210x210/",
-          title: "XXXXXXXXXXXXXXXXXXX",
-          vouchers: "200",
-          retMoney: "0.99",
-          money: "500.99",
-          realMoney: "30",
-          sales: "9985",
-        },
-      ],
+
       experiences: [
         {
           title: "学历",
@@ -256,7 +243,7 @@ export default {
               time: "2016.11 - 至今",
               subtitle: "前端开发工程师",
               description:
-                "在此期间主要负责华为高保真页面的输出，其中涉及到angularjs、vue、uee的知识;gadget框架;ucd smartue组件的二次开发以及大量的图表绘制。高效的完成前端项目工作。",
+                "负责华为前端页面输出，对接业务与技术，提供部分技术支持。<br>熟练使用各种JavaScript库,包括Ract、angularjs、vue等。开发大量组件、图表绘制、svg图形等多种功能<br>帮助团队搭建前端工程化项目，优化项目运行质量",
               location: "江苏省南京市",
               link: "https://developer.huawei.com/consumer/cn/",
             },
@@ -265,7 +252,7 @@ export default {
               time: "2016.01 - 2016.11",
               subtitle: "开发工程师",
               description:
-                "SIS(火电厂厂级监控信息系统)系统的前端H5工作，已经后台的数据处理工作",
+                "负责系统前端用户UI开发，衔接产品和技术.<br>使用MVC架构，实现对数据的各种操作。",
               location: "江苏省南京市",
               link: "http://www.unicst.com",
             },
@@ -274,7 +261,7 @@ export default {
               time: "2013.12 - 2016.01",
               subtitle: "程序组长",
               description:
-                "毕业后，一直就业与当前医疗行业公司，从刚开始的软件开发到网站营运到程序组长。精通前端、服务器管理、部门协调、产品规划。已掌握处理及管理美工，文案，程序，前端。多家医院的企划与网站的运维，以及网站前端、后台的管理 ",
+                "作为程序组长负责服务器管理、部门协调、产品规划。三个月内实现多家医院网站的企划与网站的开发，以及网站前端、后台的管理<br>熟悉使用PHP框架的CMS开发逻辑、灵活使用包括Jquery、echart、.net等。<br>设计使用了一套全新的文章发布系统的UI，从而改善公司员工的工作效率，得到了极大好评。",
               location: "江苏省南京市",
               // link: "http://www.unicst.com",
             },
@@ -437,31 +424,35 @@ export default {
       ],
       projects: [
         {
-          cityName: "华为驻场前端开发 ",
+          cityName: "VOICEUI",
           company: "软通动力信息技术(集团)有限公司",
-          time: "2016.11 - 至今",
+          time: "2017.09 - 2018.12",
+          img: "/src/assets/img/project_03.png",
           abilities: [
             "React",
             "TypeScript",
             "webpack",
             "less",
-            "VUEJS",
-            "AngularJs",
+            "html",
+            "css",
             "JavaScript/es6",
+            "jQuery",
+            "SVG",
+            "git",
           ],
           job: "前端开发工程师",
           description:
-            "长时间接触三大运行商、以及华为的网站开发项目。移动端，PC站均有不少项目开发参与。项目中掌握华为所使用的框架系统，高效的完成全站的开发功能。 前端功能开发，以及框架组建的代码编写 ",
-          skillSummary: "skillSummary",
-          img: "/img/project_02.png",
+            "一套拖拽组合各式流程图，快捷生成华为手机小艺回复的答复逻辑所需JSON数据。<br>  运用了React框架开发流程图节点组件，实现动态数据的配置与交互。<br>大量编写原始JS代码、编写SVG图形代码完成多种连线与图形绘制",
           isNew: false,
         },
         {
           cityName: "UI Components前端组件",
           company: "软通动力信息技术(集团)有限公司",
+          img: "/src/assets/img/project_04.png",
           time: "2017.09 - 2018.12",
           abilities: [
             "React",
+            "Vue",
             "TypeScript",
             "webpack",
             "less",
@@ -474,48 +465,50 @@ export default {
           ],
           job: "前端开发工程师",
           description:
-            "致力于构建前端渠道 基础框架以及基础业务能力，通过构筑组件资 产库（基础组件/Gadget/服务编排组件等）， 支撑DSV快速定制。其中Gadget包括跨渠道 通用组件、电信领域人工渠道组件、电信领域 自助渠道组件。根据不同的业务场景，可实现 业务的快速定制。   项目职责负责提供组件前端以及样式的维护、负责组件前端部分的框架搭建、负责各个项目使用组件时遇到的问题的维护以及自定义组件的提供。 ",
+            "一套基于多种前端框架的组件库，根据不同的业务场景，可实现 业务的快速定制。<br>  运用了React、Vue框架实现了多种框架的组件开发，负责部分组件开发以及样式的维护以便于完成组件整体换肤功能。<br>实现响应式处理多设备组件兼容，大范围二次开发echart完成复杂图形绘制",
           isNew: false,
         },
-        {
-          cityName: "香港HKT数字化转型战略项目",
-          company: "软通动力信息技术(集团)有限公司",
-          time: "2017.02-2017.12",
-          abilities: [
-            "C#",
-            "html",
-            "css",
-            "JavaScript",
-            "jQuery",
-            "echart",
-            "git",
-          ],
-          job: "前端开发工程师",
-          description:
-            "香港电讯有限公司（HKT）为把握数字时代的发展机遇，积极推动业务转型。HKT的数字化转型计划旨在建立全新的云基础设施及平台，以加强香港电讯的数字化运营能力，并优化其向客户提供的服务。华为在香港电讯的转型过程中，一直提供尖端的技术及解决方案。  项目职责整个项目前端的负责人，参与开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本、保证兼容性和高性能、处理低至IE8的业务兼容性。明确理解产品的需求和定位，根据产品设计和规范开发基于Web的数据可视化应用。 ",
-          isNew: false,
-        },
-        {
-          cityName: "广州移动CRM",
-          company: "软通动力信息技术(集团)有限公司",
-          time: "2017.04-2017.12",
-          abilities: [
-            "C#",
-            "html",
-            "css",
-            "JavaScript",
-            "jQuery",
-            "echart",
-            "git",
-          ],
-          job: "前端开发工程师",
-          description:
-            "广东移动营业前台老系统在2016年至今针对T欧赔3业务体验优化专项。整个项目过程采用用户参与式设计方式，用户深度参与设计，通过与用户共同设计的方法，产品成功上线，目前稳健运营中。 项目职责整个项目前端的负责人，参与开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本、保证兼容性和高性能。 ",
-          isNew: false,
-        },
+        // {
+        //   cityName: "香港HKT数字化转型战略项目",
+        //   company: "软通动力信息技术(集团)有限公司",
+        //   time: "2017.02-2017.12",
+        //   abilities: [
+        //     "C#",
+        //     "html",
+        //     "css",
+        //     "JavaScript",
+        //     "jQuery",
+        //     "echart",
+        //     "git",
+        //   ],
+        //   job: "前端开发工程师",
+        //   description:
+        //     "香港电讯有限公司（HKT）为把握数字时代的发展机遇，积极推动业务转型。HKT的数字化转型计划旨在建立全新的云基础设施及平台，以加强香港电讯的数字化运营能力，并优化其向客户提供的服务。华为在香港电讯的转型过程中，一直提供尖端的技术及解决方案。  项目职责整个项目前端的负责人，参与开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本、保证兼容性和高性能、处理低至IE8的业务兼容性。明确理解产品的需求和定位，根据产品设计和规范开发基于Web的数据可视化应用。 ",
+        //   isNew: false,
+        // },
+        // {
+        //   cityName: "广州移动CRM",
+        //   company: "软通动力信息技术(集团)有限公司",
+        //   time: "2017.04-2017.12",
+        //   abilities: [
+        //     "C#",
+        //     "html",
+        //     "css",
+        //     "JavaScript",
+        //     "jQuery",
+        //     "echart",
+        //     "git",
+        //   ],
+        //   job: "前端开发工程师",
+        //   description:
+        //     "广东移动营业前台老系统在2016年至今针对T欧赔3业务体验优化专项。整个项目过程采用用户参与式设计方式，用户深度参与设计，通过与用户共同设计的方法，产品成功上线，目前稳健运营中。 项目职责整个项目前端的负责人，参与开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本、保证兼容性和高性能。 ",
+        //   isNew: false,
+        // },
         {
           cityName: "中国移动第三代CRM",
           company: "软通动力信息技术(集团)有限公司",
+
+          img: "/src/assets/img/project_05.png",
           time: "2017.02-2017.12",
           abilities: [
             "C#",
@@ -528,7 +521,7 @@ export default {
           ],
           job: "前端开发工程师",
           description:
-            "传统的业务经营体系已成为制约中国移动战略实现的瓶颈，业务支撑能力要匹配战略目标，第三代BSS即将成为中国移动转型的重要载体。打造新一代的运营支撑系统，实现运营商数字化运营转型。 整个项目前端的负责人，参与开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本、保证兼容性和高性能、处理低至IE8的业务兼容性。明确理解产品的需求和定位，根据产品设计和规范开发基于Web的数据可视化应用。 ",
+            "中国移动前台老系统升级，打造新一代的运营支撑系统，实现运营商数字化运营转型。<br>开发所有的前端页面输出、项目前端框架搭建。同时为开发提供合理的技术方案建议、持续优化前端界面和脚本。<br>保证兼容性和高性能、处理低至IE8的业务兼容性。明确理解产品的需求和定位，根据产品设计和规范开发基于Web的数据可视化应用。 ",
           isNew: false,
         },
         {
@@ -554,6 +547,7 @@ export default {
           cityName: "多家医院优化站建设",
           company: "南京元山网络科技有限公司",
           time: "2015.03-2016.01",
+          img: "/src/assets/img/project_02.png",
           abilities: [
             "php",
             "cms",
@@ -566,45 +560,94 @@ export default {
           ],
           job: "企划组长",
           description:
-            "负责的10多家医院的PC站与移动站，部分站点用到bootstrap技术。日常管理着40多个优化站点的PC站与wap站。",
+            "基于CMS系统开发的多个有利于SEO网站，主要以主页、列表页、文章页、专题页为模版进行开发。<br>使用Bootstrap辅助响应式设计，区分PC与移动端入口。<br>通过修改后台php以及Mysql完成一些定制化需求",
           isNew: false,
         },
-        {
-          cityName: "整形医院网站建设",
-          company: "南京元山网络科技有限公司",
-          time: "2015.04-2015.08",
-          abilities: [
-            "php",
-            "cms",
-            "html",
-            "css",
-            "JavaScript",
-            "jQuery",
-            "echart",
-            "SVN",
-          ],
-          job: "网站开发工程师",
-          description: "时尚理念的整形医院优化站的PC站与wap站建设 ",
-          isNew: false,
-        },
+        // {
+        //   cityName: "整形医院网站建设",
+        //   company: "南京元山网络科技有限公司",
+        //   time: "2015.04-2015.08",
+        //   abilities: [
+        //     "php",
+        //     "cms",
+        //     "html",
+        //     "css",
+        //     "JavaScript",
+        //     "jQuery",
+        //     "echart",
+        //     "SVN",
+        //   ],
+        //   job: "网站开发工程师",
+        //   description: "时尚理念的整形医院优化站的PC站与wap站建设 ",
+        //   isNew: false,
+        // },
         {
           cityName: "商务通开发",
           company: "南京元山网络科技有限公司",
           time: "2014.12 - 2015.03",
-          abilities: ["C#", ".net", "SQL Server", "SVN", "MVC"],
+          img: "/src/assets/img/project_01.gif",
+          abilities: [
+            "C#",
+            ".net",
+            "JavaScript",
+            "echart",
+            "SQL Server",
+            "SVN",
+            "MVC",
+          ],
           job: "程序开发",
           description:
-            "一款windows窗口化在线客服系统，可以像雷达一样对网站进行实时的监控，助您把握访客的来源地址、搜索关键词、正在访问的页面等。",
+            "一款windows窗口化在线客服系统，可以像雷达一样对网站进行实时的监控，把握访客的来源地址、搜索关键词、正在访问的页面等。<br>数据显示基于echart进行二次开发",
           isNew: false,
         },
       ],
     };
   },
   created() {},
+  mounted() {
+    let jump = document.querySelectorAll(".container");
+
+    let arr = [];
+    for (let index = 0; index < jump.length; index++) {
+      const element = jump[index];
+      arr.push(element.offsetTop);
+    }
+    this.fixedScrollTop = arr;
+    // debugger
+    window.addEventListener("scroll", this.scrollEvent, true);
+  },
   methods: {
-    onNavClick(index) {
-      this.navOption.index = index;
+    scrollEvent(e) {
+      this.catalogCur =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      if (this.catalogCur > this.fixedScrollTop[1]) {
+        this.navOption.fixed = true;
+      } else {
+        this.navOption.fixed = false;
+      }
+
+      for (let index = 0; index < this.fixedScrollTop.length; index++) {
+        const element = this.fixedScrollTop[index];
+        if (this.catalogCur + 10 < element) {
+          let num = index - 2;
+          num = Math.min(4, num);
+          num = Math.max(0, num);
+          this.navOption.index = num;
+          break;
+        }
+      }
     },
+    onNavClick(index) {
+      let jump = document.querySelectorAll(".container");
+      jump[index + 1].scrollIntoView({ block: "start", behavior: "smooth" });
+    },
+  },
+  destroyed() {
+    // 离开该页面需要移除这个监听的事件，不然会报错
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
