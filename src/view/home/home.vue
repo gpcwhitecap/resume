@@ -424,10 +424,30 @@ export default {
       ],
       projects: [
         {
+          cityName: "华为开发者联盟官网",
+          company: "软通动力信息技术(集团)有限公司",
+          time: "2020.02 - 2020.12",
+          img: "./img/project_06.png",
+          abilities: [
+            "Vue.js",
+            "AngularJs",
+            "JavaScript/es6",
+            "webpack",
+            "less",
+            "html",
+            "css",
+            "git",
+          ],
+          job: "前端开发工程师",
+          description:
+            "华为开发者联盟首页升级，分别采用AngularJs、Vue两种<br>实现多端响应式兼容，区域化组件模块开发，多种数据配置多种形态<br>搭建AngularJs、Vue2.0前端开发框架",
+          isNew: false,
+        },
+        {
           cityName: "VOICEUI",
           company: "软通动力信息技术(集团)有限公司",
-          time: "2017.09 - 2018.12",
-          img: "/src/assets/img/project_03.png",
+          time: "2019.02 - 2019.12",
+          img: "./img/project_03.png",
           abilities: [
             "React",
             "TypeScript",
@@ -448,7 +468,7 @@ export default {
         {
           cityName: "UI Components前端组件",
           company: "软通动力信息技术(集团)有限公司",
-          img: "/src/assets/img/project_04.png",
+          img: "./img/project_04.png",
           time: "2017.09 - 2018.12",
           abilities: [
             "React",
@@ -508,7 +528,7 @@ export default {
           cityName: "中国移动第三代CRM",
           company: "软通动力信息技术(集团)有限公司",
 
-          img: "/src/assets/img/project_05.png",
+          img: "./img/project_05.png",
           time: "2017.02-2017.12",
           abilities: [
             "C#",
@@ -547,7 +567,7 @@ export default {
           cityName: "多家医院优化站建设",
           company: "南京元山网络科技有限公司",
           time: "2015.03-2016.01",
-          img: "/src/assets/img/project_02.png",
+          img: "./img/project_02.png",
           abilities: [
             "php",
             "cms",
@@ -585,7 +605,7 @@ export default {
           cityName: "商务通开发",
           company: "南京元山网络科技有限公司",
           time: "2014.12 - 2015.03",
-          img: "/src/assets/img/project_01.gif",
+          img: "./img/project_01.gif",
           abilities: [
             "C#",
             ".net",

@@ -7,9 +7,7 @@
     <div class="experience-info">
       <div>
         <strong> {{ data.subtitle }} </strong>
-        <p class="hidden-phone">
-          {{ data.description }}
-        </p>
+        <p class="hidden-phone" v-html="data.description"></p>
         <div class="experience-details">
           <div class="location" v-if="data.location">
             <span class="icon iconfont icon-dizhi"></span>
